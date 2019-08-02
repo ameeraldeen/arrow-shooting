@@ -1,4 +1,5 @@
 # Arrow-Shooting
 Arrow Shooting Game using C++ and OpenGL
 
-# Screencasts:
+
+$ g++ main.cpp -o arrowGame -lGL -lGLU -lglut; ./arrowGame

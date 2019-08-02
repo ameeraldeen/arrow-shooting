@@ -1,21 +1,20 @@
 // Author: Khaled Alam
 // Email: khaledalam.net@gmail.com
-//
-// Description:
-// Arrow Shooting Game using C++ and OpenGL
 
+// Description:
+// Arrow Shooting 2D Game using C++ and OpenGL
 
 #include "Base/Includes.h"
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
     glColor4f(1, 1, 1, 1);
-    
+
     displyInitArrow();
 
-    glFlush();    
+    glFlush();
 }
 
 void initRendering()
@@ -36,14 +35,10 @@ void resizeWindow(int w, int h)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     // [left, right] x [bottom, top]
-    gluOrtho2D(screenLeft, screenRight, screenBottom, screenTop); 
+    gluOrtho2D(screenLeft, screenRight, screenBottom, screenTop);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
-
-
-
-
 
 int main(int argc, char **argv)
 {
@@ -54,7 +49,6 @@ int main(int argc, char **argv)
     glutCreateWindow("Arrows Attak Shooter");
     //----------
 
-    
     initRendering();
     glutDisplayFunc(display);
     glutReshapeFunc(resizeWindow);
@@ -64,10 +58,7 @@ int main(int argc, char **argv)
     // glutMotionFunc(onMotionEvent);
     // glutIdleFunc(onIdleEvent);
 
-    
-   
     glutMainLoop();
-    
-    
+
     return 0;
 }
