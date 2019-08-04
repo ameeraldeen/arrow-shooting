@@ -13,13 +13,24 @@ using namespace std;
 int cnt = 1;
 float gx2 = 20;
 float gy2 = 20;
+float theta = 0;
 int windowHeight = 500;
 int windowWidth = 500;
 const float screenLeft = 0.0f;
 const float screenRight = 500.0f;
 const float screenBottom = 0.0f;
 const float screenTop = 500.0f;
+const float minLimit = 70.0f;
+
+const float R = 3.5;
+
 const float PI = 3.14285714286;
+
+const int UP = -1;
+const int DOWN = 1;
+
+int recentAction = UP;
+bool run = true;
 
 #define MaxNumPts 16
 
@@ -30,6 +41,9 @@ void displayPoints(void);
 void addNewPoint(float x, float y);
 void initRendering();
 void resizeWindow(int w, int h);
+void fire();
+void goUp();
+void goDown();
 // END Prototypes
 
 // START Structs
@@ -56,14 +70,40 @@ struct Line
 };
 // END Structs
 
+Line arrow = Line(
+    Point(screenLeft, screenTop / 2),
+    Point(screenRight / 5, screenTop / 2));
+
+const Line defaultArrow = arrow;
+
 // START Events
 void onKeyboardEvent(unsigned char key, int x, int y)
 {
-    cout << key << endl;
     switch (key)
     {
     case 27: // Escape key
         exit(0);
+        break;
+    case 32:
+    case 13:
+        fire();
+        break;
+    }
+}
+
+void SpecialInput(int key, int x, int y)
+{
+    switch (key)
+    {
+    case GLUT_KEY_DOWN:
+        goDown();
+        break;
+    case GLUT_KEY_UP:
+        goUp();
+        break;
+    case GLUT_KEY_RIGHT:
+    case GLUT_KEY_LEFT:
+        arrow = defaultArrow;
         break;
     }
 }
@@ -141,34 +181,80 @@ void drawArrow(Line x)
     glVertex2f((screenRight / 5), screenTop / 2); // (1/5) ---
     glVertex2f((screenRight / 5) - 25, screenTop / 2 + 15);
     glEnd();
+
+    if (run)
+    {
+        fire();
+    }
 }
 
 void displyInitArrow(float angle = 90.0)
 {
-    Line base = Line(
-        Point(screenLeft, screenTop / 2),
-        Point(screenRight / 5, screenTop / 2));
-
-    drawArrow(base);
-
-    // delay(5);
-    glutPostRedisplay();
 }
 
-void drawPoint(float x, float y)
+void fire()
 {
-    glColor4f(1, 1, 1, 1);
-    glBegin(GL_POINTS);
-    glVertex2f(x, y);
-    glEnd();
-    glFlush();
+    cout << "fired" << endl;
+
+    cout << arrow.to.x << endl;
+    if (arrow.to.x >= 500)
+    {
+        run = false;
+        arrow.to.x = 499;
+        return;
+    }
+    arrow.from.x += 0.1, arrow.to.x += 0.1;
+}
+
+void goUp()
+{
+    if (arrow.to.x <= minLimit && recentAction == UP)
+    {
+        arrow.to.x = minLimit;
+        return;
+    }
+
+    // theta += 0.05;            //get the current angle
+    // float x = R * sin(theta); //calculate the x component
+    // float y = R * cos(theta); //calculate the y component
+
+    cout << "up! " << arrow.to.x << " " << arrow.to.y << endl;
+    arrow.to.x -= sin(0.7);
+    arrow.to.y += cos(0.7);
+}
+
+void goDown()
+{
+    if (arrow.to.x <= minLimit && recentAction == DOWN)
+    {
+        arrow.to.x = minLimit;
+        return;
+    }
+
+    cout << "down! " << arrow.to.x << " " << arrow.to.y << endl;
+
+    // if (arrow.to.x >= 100)
+    // {
+    //     cout << "Y" << endl;
+    //     arrow.to.x -= sin(0.7);
+    //     arrow.to.y += cos(0.7);
+    // }
+    // else
+    // {
+    //     arrow.to.x += sin(0.7);
+    //     arrow.to.y -= cos(0.7);
+    // }
 }
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glColor4f(1, 1, 1, 1);
-    displyInitArrow();
+
+    drawArrow(arrow);
+
+    glutPostRedisplay();
+
     glFlush();
 }
 
@@ -208,6 +294,7 @@ int main(int argc, char **argv)
     glutDisplayFunc(display);
     glutReshapeFunc(resizeWindow);
     glutKeyboardFunc(onKeyboardEvent);
+    glutSpecialFunc(SpecialInput);
     glutMouseFunc(onMouseEvent);
     // glutPassiveMotionFunc(onPassiveMotionEvent);
     // glutMotionFunc(onMotionEvent);
