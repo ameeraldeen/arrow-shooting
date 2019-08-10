@@ -1,16 +1,20 @@
 # Arrow-Shooting
 
-Arrow Shooting Game using C++ and OpenGL
+Arrow Shooting 2D Game in C++ using OpenGL and various Geometry Algorithms
 
-<img src="imgs/arrow.png">
+<img src="imgs/arrow.jpg">
 
 # Preview:
 
 ![](preview.gif)
 
-<img src="imgs/fire_func.jpg" width="350">
+## Inital design of the game idea:
 
-<img src="imgs/inital_plan.png" width="350">
+<img src="imgs/inital_plan.png">
+
+## Design fire function:
+
+<img src="imgs/fire_func.jpg">
 
 # Usage:
 
@@ -23,9 +27,9 @@ $ ./arrowGame
 
 ## Keys:<br>
 
-[Up] -> increase arrow angle<br>
-[Down] -> decrease arrow angle<br>
-[Left] -> reset arrow position to default<br>
-[Right] -> shoot arrow<br>
-[Space] -> shoot arrow<br>
-[R] -> restart game<br>
+`[Up]` -> increase arrow angle<br>
+`[Down]` -> decrease arrow angle<br>
+`[Left]` -> reset arrow position to default<br>
+`[Right]` -> shoot arrow<br>
+`[Space]` -> shoot arrow<br>
+`[R]` -> restart game<br>
