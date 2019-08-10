@@ -4,6 +4,10 @@ Arrow Shooting Game using C++ and OpenGL
 
 <img src="imgs/arrow.png">
 
+# Preview:
+
+![](preview.gif)
+
 <img src="imgs/fire_func.jpg" width="350">
 
 <img src="imgs/inital_plan.png" width="350">
