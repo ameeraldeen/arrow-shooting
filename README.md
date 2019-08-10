@@ -8,12 +8,10 @@ Arrow Shooting 2D Game in C++ using OpenGL and various Geometry Algorithms
 
 ![](preview.gif)
 
-## Inital design of the game idea:
-
+Inital design of the game idea:
 <img src="imgs/inital_plan.png">
 
-## Design fire function:
-
+Design fire function:
 <img src="imgs/fire_func.jpg">
 
 # Usage:

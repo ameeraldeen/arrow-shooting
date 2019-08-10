@@ -193,6 +193,7 @@ void onKeyboardEvent(unsigned char key, int x, int y)
         break;
     case 'r': // r key
         time(&start);
+        score = 0;
         break;
     }
 }
