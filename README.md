@@ -1,6 +1,6 @@
 # Arrow-Shooting
 
-Arrow Shooting 2D Game in C++ using OpenGL and various Geometry Algorithms
+Arrow Shooting 2D Game in C++ using OpenGL and various Trigonometry and Geometry Algorithms.
 
 <img src="imgs/arrow.jpg">
 
